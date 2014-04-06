@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2013, Rudolf Tammekivi.
+# Copyright (c) 2014, Rudolf Tammekivi.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 and
@@ -10,8 +10,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-#
-
 
 LOCAL_PATH := $(call my-dir)
 

@@ -1,5 +1,5 @@
 #
-# Copyright 2014 The Android Open Source Project
+# Copyright (C) 2014 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,13 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := $(call my-dir)
+files := \
+	sbin/charge.sh \
+	sbin/alignbuffer.sh \
+	sbin/charge \
+	sbin/rmt_storage \
+	sbin/rmt_oeminfo \
+	sbin/linker
 
-ifeq ($(PRODUCT_MANUFACTURER),HUAWEI)
-  ifeq ($(TARGET_BOARD_PLATFORM),msm7x27a)
-    include $(call all-makefiles-under,$(LOCAL_PATH))
-  endif
-endif
+PRODUCT_COPY_FILES += $(foreach file,$(files),\
+        $(LOCAL_PATH)/$(file):/recovery/root/$(file))

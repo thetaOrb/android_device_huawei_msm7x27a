@@ -14,19 +14,33 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # The GPS configuration appropriate for this device.
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/huawei/msm7x27a-common/overlay
+# Include configs
+$(call inherit-product, device/huawei/msm7x27a/configs/configs.mk)
 
-PRODUCT_AAPT_CONFIG := normal hdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
+# Include input
+$(call inherit-product, device/huawei/msm7x27a/input/input.mk)
 
+# Include ramdisk
+$(call inherit-product, device/huawei/msm7x27a/ramdisk/ramdisk.mk)
+
+# Include recovery
+$(call inherit-product, device/huawei/msm7x27a/recovery/recovery.mk)
+
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += device/huawei/msm7x27a/overlay
+
+# Tags
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# Packages
+# Packages :
+
+# Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.primary.msm7x27a \
@@ -34,58 +48,35 @@ PRODUCT_PACKAGES += \
     audio_policy.msm7x27a \
     libaudioutils
 
+# Graphics
 PRODUCT_PACKAGES += \
     copybit.msm7x27a \
     gralloc.msm7x27a \
     hwcomposer.msm7x27a \
     libtilerenderer
 
-PRODUCT_PACKAGES += \
-    librs_jni \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers
-
+# Video
 PRODUCT_PACKAGES += \
     libmm-omxcore \
     libOmxCore \
     libstagefrighthw
 
+# GPS
 PRODUCT_PACKAGES += \
     gps.msm7x27a
 
+# Network
+PRODUCT_PACKAGES += \
+    hwmac \
+    libnetcmdiface
+
+# Other
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
-    hwmac \
     make_ext4fs \
     setup_fs
 
-# Files
-PRODUCT_COPY_FILES += \
-    device/huawei/msm7x27a-common/rootdir/init.huawei.rc:root/init.huawei.rc \
-    device/huawei/msm7x27a-common/rootdir/init.huawei.usb.rc:root/init.huawei.usb.rc \
-    device/huawei/msm7x27a-common/rootdir/ueventd.huawei.rc:root/ueventd.huawei.rc
-
-PRODUCT_COPY_FILES += \
-    device/huawei/msm7x27a-common/configs/qosmgr_rules.xml:system/etc/qosmgr_rules.xml
-
-PRODUCT_COPY_FILES += \
-    device/huawei/msm7x27a-common/configs/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
-    device/huawei/msm7x27a-common/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
-    device/huawei/msm7x27a-common/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/huawei/msm7x27a-common/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
-
-PRODUCT_COPY_FILES += \
-    device/huawei/msm7x27a-common/configs/audio_policy.conf:system/etc/audio_policy.conf \
-    device/huawei/msm7x27a-common/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    device/huawei/msm7x27a-common/configs/media_profiles.xml:system/etc/media_profiles.xml
-
-PRODUCT_COPY_FILES += \
-    device/huawei/msm7x27a-common/idc/qwerty.idc:system/usr/idc/qwerty.idc \
-    device/huawei/msm7x27a-common/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
-    device/huawei/msm7x27a-common/keychars/7x27a_kp.kcm:system/usr/keychars/7x27a_kp.kcm \
-    device/huawei/msm7x27a-common/keylayout/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl \
-    device/huawei/msm7x27a-common/keylayout/surf_keypad.kl:system/usr/keylayout/surf_keypad.kl
+# Files :
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -98,14 +89,20 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
-# Properties
+# Properties :
+
+# CWM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.enable_key_repeat=true
+
+# Headset
 PRODUCT_PROPERTY_OVERRIDES += \
     headset.hook.delay=500
 
+# Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bluetooth.remote.autoconnect=true \
     ro.bluetooth.request.master=true \
@@ -113,9 +110,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bluetooth.dun=true \
     ro.qualcomm.bluetooth.ftp=true
 
+# FM Radio
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.enable_key_repeat=true
+    ro.fm.analogpath.supported=false \
+    ro.fm.transmitter=false \
+    ro.fm.mulinst.recording.support=false
 
+# Display
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     debug.composition.type=dyn \
@@ -128,30 +129,50 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.strictmode.disable=true \
     windowsmgr.max_events_per_sec=90
 
+# Memory
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.purgeable_assets=1 \
     ro.config.low_ram=true
 
+# Qualcomm
 PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware=true \
     dev.pm.dyn_sample_period=700000 \
     dev.pm.dyn_samplingrate=1 \
     ro.vendor.extension_library=/system/lib/libqc-opt.so
 
+# Telephony
 PRODUCT_PROPERTY_OVERRIDES += \
     ril.subscription.types=NV,RUIM \
     rild.libargs=-d/dev/smd0 \
     ro.telephony.call_ring.delay=3000 \
     ro.telephony.call_ring.multiple=false
 
+# Storage
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb \
     ro.vold.umsdirtyratio=50
 
+# Web
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.webview.provider=classic
 
+# WiFi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=60
+
+# Dalvik
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    dalvik.vm.checkjni=0 \
+#    dalvik.vm.debug.alloc=0
+
+# Legacy
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.electronbeam.legacy=1
+
+# Debug
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    persist.service.adb.enable=1
 
 $(call inherit-product, vendor/huawei/msm7x27a/vendor-blobs.mk)

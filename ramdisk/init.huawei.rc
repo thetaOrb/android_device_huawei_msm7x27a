@@ -26,7 +26,7 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.device.rc
+import init.huawei.device.rc
 import init.huawei.usb.rc
 
 on init
@@ -126,21 +126,24 @@ on boot
     chmod 0660 /sys/power/touch_event
     chmod 0660 /sys/power/touch_event_timer
 
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 25000
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 80
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 320000
-
+    # Enable suspend
     write /sys/devices/platform/msm_sdcc.1/idle_timeout 10
-    write /sys/module/lowmemorykiller/parameters/adj 0,1,2,4,9,12
-    write /proc/sys/vm/min_free_kbytes 5120
-    write /proc/sys/vm/page-cluster 0
-
     write /sys/module/pm2/modes/cpu0/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm2/modes/cpu1/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm2/modes/cpu0/standalone_power_collapse/suspend_enabled 1
     write /sys/module/pm2/modes/cpu1/standalone_power_collapse/suspend_enabled 1
     write /sys/module/pm2/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm2/modes/cpu0/power_collapse/idle_enabled 1
+
+    # Kernel tuning
+    write /proc/sys/vm/page-cluster 0
+    # write /proc/sys/vm/dirty_expire_centisecs 500
+    # write /proc/sys/vm/dirty_writeback_centisecs 1000
+    # write /proc/sys/vm/dirty_ratio 90
+    # write /proc/sys/vm/dirty_background_ratio 60
+    write /proc/sys/vm/swappiness 20
+    # write /proc/sys/vm/vfs_cache_pressure 50
+    write /proc/sys/vm/min_free_kbytes 5120
 
 on emmc-fs
     # mount mmc partitions
@@ -209,7 +212,7 @@ service qmuxd /system/bin/qmuxd
     user radio
     group radio audio bluetooth gps qcom_diag
 
-service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
+service dhcpcd_bt-pan /system/bin/dhcpcd -aABDKL
     class late_start
     disabled
     oneshot
@@ -219,7 +222,7 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -BKLG
+service dhcpcd_eth0 /system/bin/dhcpcd -aABDKL
     class main
     disabled
     oneshot
@@ -229,7 +232,7 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service dhcpcd_p2p /system/bin/dhcpcd -BKLG
+service dhcpcd_p2p /system/bin/dhcpcd -aABDKL
     class main
     disabled
     oneshot
@@ -251,11 +254,6 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input
-
-service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
-    class late_start
-    user system
-    group system
 
 service akm8975 /system/bin/akmd8975
     class main

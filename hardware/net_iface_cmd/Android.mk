@@ -1,4 +1,3 @@
-#
 # Copyright 2014 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,12 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(PRODUCT_MANUFACTURER),HUAWEI)
-  ifeq ($(TARGET_BOARD_PLATFORM),msm7x27a)
-    include $(call all-makefiles-under,$(LOCAL_PATH))
-  endif
-endif
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := net_iface.c
+LOCAL_MODULE := libnetcmdiface
+LOCAL_CFLAGS := -mabi=aapcs-linux
+LOCAL_MODULE_TAGS := optional
+LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
+
+include $(BUILD_SHARED_LIBRARY)

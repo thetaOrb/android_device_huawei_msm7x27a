@@ -1,5 +1,5 @@
 #
-# Copyright 2014 The Android Open Source Project
+# Copyright (C) 2014 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,14 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := $(call my-dir)
+files := \
+	dhcpcd/dhcpcd.conf \
+	wifi/wpa_supplicant.conf \
+	wifi/wpa_supplicant_overlay.conf \
+	wifi/p2p_supplicant_overlay.conf \
+	audio_policy.conf \
+	media_codecs.xml \
+	media_profiles.xml
 
-ifeq ($(PRODUCT_MANUFACTURER),HUAWEI)
-  ifeq ($(TARGET_BOARD_PLATFORM),msm7x27a)
-    include $(call all-makefiles-under,$(LOCAL_PATH))
-  endif
-endif
+PRODUCT_COPY_FILES += $(foreach file,$(files),\
+        $(LOCAL_PATH)/$(file):system/etc/$(file))
