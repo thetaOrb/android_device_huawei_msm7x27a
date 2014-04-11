@@ -27,7 +27,7 @@ $(call inherit-product, device/huawei/msm7x27a/configs/configs.mk)
 $(call inherit-product, device/huawei/msm7x27a/input/input.mk)
 
 # Include ramdisk
-$(call inherit-product, device/huawei/msm7x27a/ramdisk/ramdisk.mk)
+$(call inherit-product, device/huawei/msm7x27a/rootdir/rootdir.mk)
 
 # Include recovery
 $(call inherit-product, device/huawei/msm7x27a/recovery/recovery.mk)
