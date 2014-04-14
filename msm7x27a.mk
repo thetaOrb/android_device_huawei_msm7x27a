@@ -163,9 +163,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=60
 
 # Dalvik
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    dalvik.vm.checkjni=0 \
-#    dalvik.vm.debug.alloc=0
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.checkjni=0 \
+    dalvik.vm.debug.alloc=0
 
 # Legacy
 PRODUCT_PROPERTY_OVERRIDES += \

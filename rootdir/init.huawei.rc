@@ -146,10 +146,10 @@ on boot
 
     # Kernel tuning
     write /proc/sys/vm/page-cluster 0
-    # write /proc/sys/vm/dirty_expire_centisecs 500
-    # write /proc/sys/vm/dirty_writeback_centisecs 1000
-    # write /proc/sys/vm/dirty_ratio 90
-    # write /proc/sys/vm/dirty_background_ratio 60
+    write /proc/sys/vm/dirty_expire_centisecs 500
+    write /proc/sys/vm/dirty_writeback_centisecs 1500
+    write /proc/sys/vm/dirty_ratio 80
+    write /proc/sys/vm/dirty_background_ratio 40
     write /proc/sys/vm/swappiness 20
     write /proc/sys/vm/vfs_cache_pressure 50
     write /proc/sys/vm/min_free_kbytes 5120
