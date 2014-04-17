@@ -630,25 +630,31 @@ status_t AudioHardware::setParameters(const String8& keyValuePairs)
 }
 #ifdef QCOM_VOIP_ENABLED
 
-uint32_t AudioHardware::getMvsMode(int format)
+uint32_t AudioHardware::getMvsMode(int format, int rate)
 {
     switch(format) {
-    case AudioSystem::PCM_16_BIT:
-        return MVS_MODE_PCM;
+    case AUDIO_FORMAT_PCM_16_BIT:
+        if(rate == AUDIO_HW_VOIP_SAMPLERATE_8K) {
+            return MVS_MODE_PCM;
+        } else if(rate== AUDIO_HW_VOIP_SAMPLERATE_16K) {
+            return MVS_MODE_PCM_WB;
+        } else {
+            return MVS_MODE_PCM;
+        }
         break;
-    case AudioSystem::AMR_NB:
+    case AUDIO_FORMAT_AMR_NB:
         return MVS_MODE_AMR;
         break;
-    case AudioSystem::AMR_WB:
+    case AUDIO_FORMAT_AMR_WB:
         return MVS_MODE_AMR_WB;
         break;
-    case AudioSystem::EVRC:
+    case AUDIO_FORMAT_EVRC:
         return   MVS_MODE_IS127;
         break;
-    case AudioSystem::EVRCB:
+    case AUDIO_FORMAT_EVRCB:
         return MVS_MODE_4GV_NB;
         break;
-    case AudioSystem::EVRCWB:
+    case AUDIO_FORMAT_EVRCWB:
         return MVS_MODE_4GV_WB;
         break;
     default:
@@ -1541,7 +1547,7 @@ status_t AudioHardware::AudioStreamInVoip::set(
 {
     ALOGD("AudioStreamInVoip::set devices = %u format = %x pChannels = %u Rate = %u \n",
          devices, *pFormat, *pChannels, *pRate);
-    if ((pFormat == 0) || BAD_INDEX == hw->getMvsMode(*pFormat)) {
+    if ((pFormat == 0) || BAD_INDEX == hw->getMvsMode(*pFormat, *pRate)) {
         ALOGE("Audio Format (%x) not supported \n",*pFormat);
         return BAD_VALUE;
     }
@@ -1604,7 +1610,7 @@ status_t AudioHardware::AudioStreamInVoip::set(
            goto Error;
         }
 
-        mvs_config.mvs_mode = mHardware->getMvsMode(*pFormat);
+        mvs_config.mvs_mode = mHardware->getMvsMode(*pFormat, *pRate);
         status = mHardware->getMvsRateType(mvs_config.mvs_mode ,&mvs_config.rate_type);
         ALOGD("set mvs config mode %d rate_type %d", mvs_config.mvs_mode, mvs_config.rate_type);
         if (status < 0) {
@@ -2096,7 +2102,7 @@ status_t AudioHardware::AudioStreamOutDirect::set(
     ALOGD("AudioStreamOutDirect::set  lFormat = %x lChannels= %u lRate = %u\n",
         lFormat, lChannels, lRate );
 
-    if ((pFormat == 0) || BAD_INDEX == hw->getMvsMode(*pFormat)) {
+    if ((pFormat == 0) || BAD_INDEX == hw->getMvsMode(*pFormat, lRate)) {
         ALOGE("Audio Format (%x) not supported \n",*pFormat);
         return BAD_VALUE;
     }
@@ -2192,7 +2198,7 @@ ssize_t AudioHardware::AudioStreamOutDirect::write(const void* buffer, size_t by
                goto Error;
             }
 
-            mvs_config.mvs_mode = mHardware->getMvsMode(mFormat);
+            mvs_config.mvs_mode = mHardware->getMvsMode(mFormat, mSampleRate);
             status = mHardware->getMvsRateType(mvs_config.mvs_mode ,&mvs_config.rate_type);
             ALOGD("set mvs config mode %d rate_type %d", mvs_config.mvs_mode, mvs_config.rate_type);
             if (status < 0) {
