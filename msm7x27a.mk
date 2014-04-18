@@ -171,8 +171,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.electronbeam.legacy=1
 
-# Debug
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    persist.service.adb.enable=1
-
 $(call inherit-product, vendor/huawei/msm7x27a/vendor-blobs.mk)
