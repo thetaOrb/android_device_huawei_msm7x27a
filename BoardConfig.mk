@@ -44,6 +44,7 @@ TARGET_ARCH_LOWMEM := true
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=huawei androidboot.selinux=permissive
 BOARD_PAGE_SIZE := 2048
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01800000
 TARGET_KERNEL_SOURCE := kernel/huawei/msm7x27a
 
 # Compiler flags
