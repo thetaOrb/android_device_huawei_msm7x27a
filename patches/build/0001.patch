@@ -1,0 +1,38 @@
+From 6fda02552e9879e9f3e4061b14930bd692ff4d32 Mon Sep 17 00:00:00 2001
+From: Kyle Harrison <khwebmail@gmail.com>
+Date: Thu, 13 Feb 2014 20:50:52 +0000
+Subject: [PATCH] build (0001): Disable Emulator to speed up build times
+
+---
+ core/main.mk | 15 ---------------
+ 1 file changed, 15 deletions(-)
+
+diff --git a/core/main.mk b/core/main.mk
+index 7c67afc..8a924db 100644
+--- a/core/main.mk
++++ b/core/main.mk
+@@ -182,22 +182,7 @@ $(error stop)
+ endif
+ 
+ ifndef BUILD_EMULATOR
+-ifeq (darwin,$(HOST_OS))
+-GCC_REALPATH = $(realpath $(shell which $(HOST_CC)))
+-ifneq ($(findstring llvm-gcc,$(GCC_REALPATH)),)
+-  # Using LLVM GCC results in a non functional emulator due to it
+-  # not honouring global register variables
+-  $(warning ****************************************)
+-  $(warning * gcc is linked to llvm-gcc which will *)
+-  $(warning * not create a useable emulator.       *)
+-  $(warning ****************************************)
+   BUILD_EMULATOR := false
+-else
+-  BUILD_EMULATOR := true
+-endif
+-else   # HOST_OS is not darwin
+-  BUILD_EMULATOR := true
+-endif  # HOST_OS is darwin
+ endif
+ 
+ $(shell echo 'VERSIONS_CHECKED := $(VERSION_CHECK_SEQUENCE_NUMBER)' \
+-- 
+1.8.5.4

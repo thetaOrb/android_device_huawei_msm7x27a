@@ -1,7 +1,7 @@
 From e67ef8bff1265001b915fa9020177414be4b3641 Mon Sep 17 00:00:00 2001
 From: Daz Jones <yuki@thebronasium.com>
 Date: Sat, 21 Dec 2013 13:50:36 +0000
-Subject: [PATCH] Build libwebcore instead of webviewchromium
+Subject: [PATCH] frameworks/webview (0001): Build libwebcore instead of webviewchromium
 
 Change-Id: I140b90336f921edacdfb98da81c2d1945404fc7f
 ---

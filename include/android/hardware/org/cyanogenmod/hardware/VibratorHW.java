@@ -39,7 +39,7 @@ public class VibratorHW {
         return Integer.parseInt(FileUtils.readOneLine(LEVEL_PATH));
     }
     public static int getDefaultIntensity()  {
-        return 2900;
+        return 2700;
     }
     public static boolean setIntensity(int intensity)  {
         return FileUtils.writeLine(LEVEL_PATH, String.valueOf(intensity));
