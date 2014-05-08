@@ -182,7 +182,6 @@ on boot
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
     
     write /sys/devices/platform/msm_sdcc.1/idle_timeout 10
-    write /sys/devices/platform/msm_sdcc.2/idle_timeout 10
 
     # Enable suspend
     write /sys/module/pm2/modes/cpu0/standalone_power_collapse/idle_enabled 1
@@ -197,10 +196,6 @@ on boot
     write /proc/sys/vm/min_free_kbytes 5120
 
 # Events
-
-on property:init.svc.bootanim=stopped
-    # For successful WLAN card detection, WLAN needs SDIO polling turned on.
-    write /sys/devices/platform/msm_sdcc.2/polling 1
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
