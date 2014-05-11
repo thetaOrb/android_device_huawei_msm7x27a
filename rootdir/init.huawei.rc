@@ -193,7 +193,7 @@ on boot
 
     # Kernel tuning
     write /proc/sys/vm/vfs_cache_pressure 80
-    write /proc/sys/vm/min_free_kbytes 5120
+    write /proc/sys/vm/min_free_kbytes 4096
 
 # Events
 
