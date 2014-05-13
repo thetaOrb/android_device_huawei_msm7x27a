@@ -178,4 +178,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.electronbeam.legacy=1
 
+# OTA
+PRODUCT_PROPERTY_OVERRIDES += \
+    otaupdater.sdcard.os=sdcard \
+    otaupdater.sdcard.recovery=sdcard
+
 $(call inherit-product, vendor/huawei/msm7x27a/vendor-blobs.mk)
