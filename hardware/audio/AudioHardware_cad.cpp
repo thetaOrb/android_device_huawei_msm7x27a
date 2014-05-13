@@ -1792,8 +1792,7 @@ static status_t do_route_audio_rpc(uint32_t device,
         args.device.tx_device = CAD_HW_DEVICE_ID_NONE;
         ALOGV("In SND_DEVICE_FM_DIGITAL_BT_A2DP_HEADSET");
     }
-    else if(device == SND_DEVICE_CURRENT)
-    {
+    else if(device == SND_DEVICE_CURRENT) {
         args.device.rx_device = CAD_HW_DEVICE_ID_CURRENT_RX;
         args.device.tx_device = CAD_HW_DEVICE_ID_CURRENT_TX;
         ALOGV("In SND_DEVICE_CURRENT");
@@ -2022,7 +2021,7 @@ status_t AudioHardware::doRouting(AudioStreamInMSM72xx *input)
         }
     }
 
-    if (mDualMicEnabled && (mMode == AudioSystem::MODE_IN_CALL || mMode == AudioSystem::MODE_IN_COMMUNICATION)) {
+    if (mDualMicEnabled && mMode == AudioSystem::MODE_IN_CALL) {
         if (new_snd_device == SND_DEVICE_HANDSET) {
             ALOGI("Routing audio to handset with DualMike enabled\n");
             new_snd_device = SND_DEVICE_IN_S_SADC_OUT_HANDSET;
@@ -2199,6 +2198,8 @@ status_t AudioHardware::setupDeviceforVoipCall(bool value)
         ALOGV("setMode fails");
         return UNKNOWN_ERROR;
     }
+
+    doRouting(NULL);
 
     if (setMicMute(!value) != NO_ERROR) {
         ALOGV("MicMute fails");
@@ -4335,7 +4336,7 @@ status_t AudioHardware::AudioStreamInMSM72xx::standby()
     if (!mHardware) return -1;
     // restore output routing if necessary
 #ifdef QCOM_FM_ENABLED
-    if (!mHardware->isFMAnalog() && !mHardware->IsFmon())
+    if (!mHardware->IsFmon())
 #endif
     {
         mHardware->clearCurDevice();

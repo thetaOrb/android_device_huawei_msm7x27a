@@ -70,6 +70,7 @@
          <Quirk name="requires-allocate-on-input-ports" />
          <Quirk name="requires-allocate-on-output-ports" />
       </MediaCodec>
+      <!--
       <MediaCodec name="OMX.qcom.audio.decoder.wma" type="audio/x-ms-wma">
          <Quirk name="requires-global-flush" />
          <Quirk name="requires-wma-pro-component" />
@@ -82,6 +83,7 @@
          <Quirk name="requires-global-flush" />
          <Quirk name="requires-wma-pro-component" />
       </MediaCodec>
+      -->
       <!-- Audio Software  -->
       <MediaCodec name="OMX.google.vorbis.decoder" type="audio/vorbis" />
       <MediaCodec name="OMX.google.gsm.decoder" type="audio/gsm" />
