@@ -180,7 +180,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # OTA
 PRODUCT_PROPERTY_OVERRIDES += \
-    otaupdater.sdcard.os=sdcard \
-    otaupdater.sdcard.recovery=sdcard
+    otaupdater.sdcard.os=internal_sd \
+    otaupdater.sdcard.recovery=internal_sd
 
 $(call inherit-product, vendor/huawei/msm7x27a/vendor-blobs.mk)

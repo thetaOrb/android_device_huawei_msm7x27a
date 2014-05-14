@@ -52,7 +52,7 @@ TARGET_GLOBAL_CFLAGS   += -mtune=cortex-a5 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a5 -mfpu=neon -mfloat-abi=softfp
 
 # Include
-TARGET_SPECIFIC_HEADER_PATH := device/huawei/msm7x27a/include/kernel
+TARGET_SPECIFIC_HEADER_PATH := device/huawei/msm7x27a/include/headers
 BOARD_HARDWARE_CLASS := device/huawei/msm7x27a/include/android/hardware
 
 # Storage
