@@ -2199,8 +2199,6 @@ status_t AudioHardware::setupDeviceforVoipCall(bool value)
         return UNKNOWN_ERROR;
     }
 
-    doRouting(NULL);
-
     if (setMicMute(!value) != NO_ERROR) {
         ALOGV("MicMute fails");
         return UNKNOWN_ERROR;

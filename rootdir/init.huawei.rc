@@ -45,10 +45,10 @@ on init
     export EXTERNAL_STORAGE /storage/sdcard0
     export SECONDARY_STORAGE /storage/sdcard1
 
-    symlink /storage/sdcard0 /mnt/internal_sd
-    symlink /storage/sdcard0 /internal_sd
-    symlink /storage/sdcard1 /mnt/sdcard
-    symlink /storage/sdcard1 /sdcard
+    #symlink /storage/sdcard0 /mnt/internal_sd
+    #symlink /storage/sdcard0 /internal_sd
+    #symlink /storage/sdcard1 /mnt/sdcard
+    #symlink /storage/sdcard1 /sdcard
 
 on emmc-fs
     # mount mmc partitions
@@ -92,7 +92,10 @@ on post-fs-data
     chmod 0660 /sys/class/android_usb/android0/f_mass_storage/lun/file
     chown system system /sys/class/android_usb/android0/f_rndis/ethaddr
     chmod 0660 /sys/class/android_usb/android0/f_rndis/ethaddr
-    
+
+    # init storage
+    start init_storage
+
     setprop vold.post_fs_data_done 1
 
 on boot
@@ -204,6 +207,12 @@ on property:wlan.driver.status=unloaded
     start hwmac
 
 # Services
+
+service init_storage /init.huawei.storage.sh
+    class core
+    user root
+    disabled
+    oneshot
 
 service hwmac /system/bin/hwmac
     class main

@@ -18,7 +18,10 @@ files := \
 	init.huawei.rc \
 	init.huawei.usb.rc \
 	ueventd.huawei.rc \
-	init.huawei.fm.sh
+	init.huawei.fm.sh \
+        init.huawei.storage.sh
 
 PRODUCT_COPY_FILES += $(foreach file,$(files),\
         $(LOCAL_PATH)/$(file):root/$(file))
+
+
