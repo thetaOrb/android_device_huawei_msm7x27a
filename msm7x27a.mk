@@ -46,7 +46,8 @@ PRODUCT_PACKAGES += \
     audio.primary.msm7x27a \
     audio.usb.default \
     audio_policy.msm7x27a \
-    libaudioutils
+    libaudioutils \
+    libaudio-resampler
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -59,7 +60,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libmm-omxcore \
     libOmxCore \
-    libstagefrighthw
+    libstagefrighthw \
+    libdashplayer
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -76,11 +78,15 @@ PRODUCT_PACKAGES += \
     libqcomfm_jni \
     qcom.fmradio
 
-# Other
+# Filesystem management tools
 PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory \
     make_ext4fs \
+    e2fsck \
     setup_fs
+ 
+# Misc
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory
 
 # Files :
 
@@ -153,7 +159,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ril.subscription.types=NV,RUIM \
     rild.libargs=-d/dev/smd0 \
     ro.telephony.call_ring.delay=3000 \
-    ro.telephony.call_ring.multiple=false
+    ro.telephony.call_ring.multiple=false \
+    ro.telephony.default_network=0 \
+    DEVICE_PROVISIONED=1
 
 # Storage
 PRODUCT_PROPERTY_OVERRIDES += \
