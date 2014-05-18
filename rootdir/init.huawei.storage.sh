@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-mount -o rw,remount -t rootfs /
+mount -o rw,remount,barrier=1 -t rootfs /
 
 switchexternal=`getprop persist.sys.vold.switchexternal`
 
@@ -36,6 +36,6 @@ case $switchexternal in
      ;;
 esac
 
-mount -o ro,remount -t rootfs /
+mount -o ro,remount,barrier=1 -t rootfs /
 
 exit 0

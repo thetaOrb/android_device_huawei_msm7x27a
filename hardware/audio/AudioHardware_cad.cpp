@@ -981,9 +981,9 @@ status_t AudioHardware::setFmVolume(float v)
         v = 1.0;
     }
 
-    int vol = lrint(v * 7.5);
-    if (vol > 7)
-        vol = 7;
+    int vol = lrint(v * 20);
+    if (vol > 0)
+	vol = vol + 1;
     ALOGD("setFmVolume(%f)\n", v);
     Mutex::Autolock lock(mLock);
     set_volume_rpc(CAD_HW_DEVICE_ID_CURRENT_RX, CAD_HW_DEVICE_ID_CURRENT_TX, SND_METHOD_VOICE, vol, m7xsnddriverfd);
