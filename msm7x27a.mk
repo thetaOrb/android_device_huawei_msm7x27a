@@ -83,6 +83,10 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     e2fsck \
     setup_fs
+
+# Webkit
+PRODUCT_PACKAGES += \
+    libwebcore
  
 # Misc
 PRODUCT_PACKAGES += \
