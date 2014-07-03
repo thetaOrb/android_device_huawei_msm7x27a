@@ -165,7 +165,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.delay=3000 \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.default_network=0 \
-    DEVICE_PROVISIONED=1
+    DEVICE_PROVISIONED=1 \
+    telephony.lteOnGsmDevice=0 \
+    persist.radio.apm_sim_not_pwdn=1
 
 # Storage
 PRODUCT_PROPERTY_OVERRIDES += \

@@ -48,8 +48,8 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01800000
 TARGET_KERNEL_SOURCE := kernel/huawei/msm7x27a
 
 # Compiler flags
-TARGET_GLOBAL_CFLAGS   += -mtune=cortex-a5 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a5 -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CFLAGS += -mtune=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 # Include
 TARGET_SPECIFIC_HEADER_PATH := device/huawei/msm7x27a/include/headers
@@ -88,7 +88,7 @@ TARGET_QCOM_MEDIA_VARIANT := caf
 # Audio
 TARGET_PROVIDES_LIBAUDIO := true
 BOARD_USES_LEGACY_ALSA_AUDIO := true
-TARGET_QCOM_AUDIO_VARIANT := legacy
+TARGET_QCOM_AUDIO_VARIANT := caf
 
 # FM Radio
 BOARD_HAVE_QCOM_FM := true

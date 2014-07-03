@@ -49,9 +49,6 @@ on emmc-fs
     # mount mmc partitions
     mount_all /fstab.huawei
 
-    # zram
-    swapon_all /fstab.huawei
-
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth

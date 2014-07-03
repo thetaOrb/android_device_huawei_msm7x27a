@@ -38,4 +38,69 @@ esac
 
 mount -o ro,remount,barrier=1 -t rootfs /
 
+# enable zram or swap
+
+swap_type=`getprop persist.sys.swap_type`
+swap_size=`getprop persist.sys.swap_size`
+swappiness=`getprop persist.sys.swappiness`
+SWAPFILE=/cache/swap/swap.file
+
+rm -rf /cache/swap
+
+case $swap_type in
+# none
+     "0")
+	break
+     ;;
+# zram
+     "1")
+	echo 1 > /sys/block/zram0/reset
+	echo $swap_size > /sys/block/zram0/disksize
+	mkswap /dev/block/zram0
+	swapon /dev/block/zram0
+	break
+     ;;
+# swap
+     "2")
+	mkdir -p /cache/swap
+	let "swap_size_mb = swap_size / 1048576"
+	dd if=/dev/zero of=$SWAPFILE bs=1048576 count=$swap_size_mb
+	mkswap $SWAPFILE
+	swapon $SWAPFILE
+	break
+     ;;
+# default
+     *)
+	# enable zram by default
+	echo 1 > /sys/block/zram0/reset
+	echo 50331648 > /sys/block/zram0/disksize
+	mkswap /dev/block/zram0
+	swapon /dev/block/zram0
+	# set default properties
+	setprop persist.sys.swap_type 1
+	setprop persist.sys.swap_size 50331648
+     ;;
+esac
+
+if [ -z "$swappiness" ]; then
+   swappiness_def=`cat /proc/sys/vm/swappiness`
+   setprop persist.sys.swappiness $swappiness_def
+else
+   echo $swappiness > /proc/sys/vm/swappiness
+fi
+
+# fstrim
+
+LOG=/data/fstrim.log
+
+if [ -e $LOG ]; then
+   rm $LOG
+fi
+
+echo "* $(date +"%m-%d-%Y %r") *" >> $LOG
+echo "*fstrim /data*" >> $LOG
+fstrim -v /data >> $LOG
+echo "*fstrim /cache*" >> $LOG
+fstrim -v /cache >> $LOG
+
 exit 0
