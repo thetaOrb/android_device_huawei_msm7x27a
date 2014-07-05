@@ -211,6 +211,11 @@ on property:wlan.driver.status=failed
 on property:wlan.driver.status=ok
     write /sys/devices/platform/msm_sdcc.2/polling 0
 
+on property:sys.radio.shutdown=true
+   exec /system/bin/sh /init.huawei.efs.sync.sh
+   user root
+   group root
+
 # Services
 
 service init_storage /init.huawei.storage.sh
