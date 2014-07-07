@@ -46,6 +46,7 @@ BOARD_KERNEL_CMDLINE := androidboot.hardware=huawei androidboot.selinux=permissi
 BOARD_PAGE_SIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01800000
 TARGET_KERNEL_SOURCE := kernel/huawei/msm7x27a
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro-4.7
 
 # Compiler flags
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=softfp
