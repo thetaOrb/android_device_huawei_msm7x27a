@@ -146,7 +146,7 @@
         <item>255</item>
     </integer-array>
 
-    <integer name="config_buttonBrightnessSettingDefault">50</integer>
+    <integer name="config_buttonBrightnessSettingDefault">40</integer>
     <bool name="config_deviceHasVariableButtonBrightness">true</bool>
 
     <!-- Hardware 'face' keys present on the device, stored as a bit field.
