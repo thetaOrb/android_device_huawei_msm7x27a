@@ -111,27 +111,13 @@ PRODUCT_COPY_FILES += \
 
 # Properties :
 
-# CWM
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.enable_key_repeat=true
-
 # Headset
 PRODUCT_PROPERTY_OVERRIDES += \
     headset.hook.delay=500
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bluetooth.remote.autoconnect=true \
-    ro.bluetooth.request.master=true \
-    ro.bt.bdaddr_path=/data/misc/bluedroid/bdaddr \
-    ro.qualcomm.bluetooth.dun=true \
-    ro.qualcomm.bluetooth.ftp=true
-
-# FM Radio
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.fm.analogpath.supported=false \
-    ro.fm.transmitter=false \
-    ro.fm.mulinst.recording.support=false
+    ro.bt.bdaddr_path=/data/misc/bluedroid/bdaddr
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -139,16 +125,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=dyn \
     debug.hwc.dynThreshold=1.91 \
     ro.bq.gpu_to_cpu_unsupported=1 \
-    ro.max.fling_velocity=4000 \
     ro.opengles.version=131072 \
     ro.sf.lcd_density=240 \
-    ro.opengles.surface.rgb565=true \
-    persist.sys.strictmode.disable=true \
-    windowsmgr.max_events_per_sec=90
+    ro.opengles.surface.rgb565=true
 
 # Memory
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.purgeable_assets=1 \
     ro.config.low_ram=true
 
 # Qualcomm
@@ -163,10 +145,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ril.subscription.types=NV,RUIM \
     rild.libargs=-d/dev/smd0 \
     ro.telephony.call_ring.delay=0 \
-    ro.telephony.call_ring.multiple=false \
-    ro.telephony.default_network=0 \
-    DEVICE_PROVISIONED=1 \
-    telephony.lteOnGsmDevice=0
+    ro.telephony.call_ring.multiple=false
 
 # Storage
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -181,11 +160,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=60
-
-# Dalvik
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.checkjni=0 \
-    dalvik.vm.debug.alloc=0
 
 # Legacy
 PRODUCT_PROPERTY_OVERRIDES += \

@@ -118,16 +118,16 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x1400000
 BOARD_CACHEIMAGE_PARTITION_SIZE := 201326592
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# SELinux
-BOARD_SEPOLICY_DIRS += device/huawei/msm7x27a/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-    file_contexts \
-    file.te
-
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_INITRC := device/huawei/msm7x27a/recovery/init.rc
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/huawei/msm7x27a/recovery/recovery-keys.c
 BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
+
+# SELinux
+BOARD_SEPOLICY_DIRS += device/huawei/msm7x27a/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+    file_contexts \
+    file.te
