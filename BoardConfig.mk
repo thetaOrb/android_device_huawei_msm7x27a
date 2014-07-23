@@ -53,7 +53,7 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 # Include
 TARGET_SPECIFIC_HEADER_PATH := device/huawei/msm7x27a/include/headers
-BOARD_HARDWARE_CLASS := device/huawei/msm7x27a/include/android/hardware
+BOARD_HARDWARE_CLASS := device/huawei/msm7x27a/include/classes/hardware
 
 # Storage
 BOARD_WANTS_EMMC_BOOT := true
