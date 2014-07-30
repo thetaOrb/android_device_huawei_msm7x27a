@@ -89,18 +89,4 @@ else
    echo $swappiness > /proc/sys/vm/swappiness
 fi
 
-# fstrim
-
-LOG=/data/fstrim.log
-
-if [ -e $LOG ]; then
-   rm $LOG
-fi
-
-echo "* $(date +"%m-%d-%Y %r") *" >> $LOG
-echo "*fstrim /data*" >> $LOG
-fstrim -v /data >> $LOG
-echo "*fstrim /cache*" >> $LOG
-fstrim -v /cache >> $LOG
-
 exit 0
