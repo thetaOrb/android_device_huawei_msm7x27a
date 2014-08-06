@@ -373,13 +373,13 @@ audio_devices_t AudioPolicyManager::getDeviceForStrategy(routing_strategy strate
             }
             break;
         }
-#ifdef QCOM_FM_ENABLED
+/*#ifdef QCOM_FM_ENABLED
         if (mAvailableOutputDevices & AUDIO_DEVICE_OUT_FM) {
             if (mForceUse[AudioSystem::FOR_MEDIA] == AudioSystem::FORCE_SPEAKER) {
                 device = AUDIO_DEVICE_OUT_SPEAKER;
             }
         }
-#endif
+#endif*/
     break;
 
     case STRATEGY_SONIFICATION:
@@ -463,12 +463,12 @@ audio_devices_t AudioPolicyManager::getDeviceForStrategy(routing_strategy strate
 #ifdef QCOM_FM_ENABLED
       if (mAvailableOutputDevices & AUDIO_DEVICE_OUT_FM) {
          device |= AUDIO_DEVICE_OUT_FM;
-         if(FM_ANALOG == getFMMode()){
+         /*if(FM_ANALOG == getFMMode()){
            if (device == (AUDIO_DEVICE_OUT_SPEAKER | AUDIO_DEVICE_OUT_WIRED_HEADSET | AUDIO_DEVICE_OUT_FM))
                 device = AUDIO_DEVICE_OUT_SPEAKER;
            else if(device & AUDIO_DEVICE_OUT_WIRED_HEADSET)
                 device &= ~(device & AUDIO_DEVICE_OUT_WIRED_HEADSET);
-         }
+         }*/
       }
 #endif
       // Do not play media stream if in call and the requested device would change the hardware
@@ -991,13 +991,13 @@ void AudioPolicyManager::setForceUse(AudioSystem::force_use usage, AudioSystem::
             ALOGW("setForceUse() invalid config %d for FOR_MEDIA", config);
             return;
         }
-#ifdef QCOM_FM_ENABLED
+/*#ifdef QCOM_FM_ENABLED
         if (getFMMode() == FM_DIGITAL && config == AudioSystem::FORCE_NONE) {
             ALOGE("donot change config as FM Mode is still digital");
             pendingForceNone = true;
             return;
         } else
-#endif
+#endif*/
         {
           pendingForceNone = false;
           mForceUse[usage] = config;
