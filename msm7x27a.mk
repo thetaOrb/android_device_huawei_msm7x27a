@@ -90,7 +90,8 @@ PRODUCT_PACKAGES += \
  
 # Misc
 PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
+    com.android.future.usb.accessory \
+    libxml2
 
 # Files :
 
