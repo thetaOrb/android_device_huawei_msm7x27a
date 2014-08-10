@@ -173,6 +173,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true
 
+# Audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    af.resampler.quality=4
+
 # OTA
 PRODUCT_PROPERTY_OVERRIDES += \
     otaupdater.sdcard.os=internal_sd \
