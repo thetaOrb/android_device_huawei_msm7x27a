@@ -1,0 +1,26 @@
+From: ChepKun <ProgrammerKun@gmail.com>
+Subject: [PATCH] build (0002): delete webviewchromium.jar from preload
+
+diff --git a/target/product/core_base.mk b/target/product/core_base.mk
+index f1dfe12..56b00e1 100644
+--- a/target/product/core_base.mk
++++ b/target/product/core_base.mk
+@@ -64,4 +64,4 @@ PRODUCT_PACKAGES += \
+ 
+ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
+ # Override the PRODUCT_BOOT_JARS set in core_minimal.mk
+-PRODUCT_BOOT_JARS := core:conscrypt:okhttp:core-junit:bouncycastle:ext:framework:framework2:telephony-common:voip-common:mms-common:android.policy:services:apache-xml:webviewchromium:telephony-msim
++PRODUCT_BOOT_JARS := core:conscrypt:okhttp:core-junit:bouncycastle:ext:framework:framework2:telephony-common:voip-common:mms-common:android.policy:services:apache-xml:telephony-msim
+diff --git a/target/product/core_minimal.mk b/target/product/core_minimal.mk
+index 1127082..a67e1a3 100644
+--- a/target/product/core_minimal.mk
++++ b/target/product/core_minimal.mk
+@@ -59,7 +59,7 @@ PRODUCT_PACKAGES += \
+     sensorservice \
+     uiautomator
+ 
+-PRODUCT_BOOT_JARS := core:conscrypt:okhttp:core-junit:bouncycastle:ext:framework:framework2:android.policy:services:apache-xml:webviewchromium
++PRODUCT_BOOT_JARS := core:conscrypt:okhttp:core-junit:bouncycastle:ext:framework:framework2:android.policy:services:apache-xml
+ 
+ PRODUCT_RUNTIMES := runtime_libdvm_default
+ 
